@@ -1,9 +1,5 @@
 fn main() {
     println!("Hello, world!");
-    let ans = sum(3,2);
-    print!("{}",ans)
-}
-
-fn sum(a:u32, b:u32)->u32{
-    return a+b;
+    let vec = vec![1,2,3,4,5];
+    print!("{:?}",vec);
 }
