@@ -1,23 +1,20 @@
-use borsh:: {BorshSerialize, BorshDeserialize};
-
-#[derive(BorshSerialize,BorshDeserialize,Clone,Debug)]
-struct User {
-    username: String,
-    password: String
-}
 
 fn main (){
-    let u = User{
-        username: String::from("alen"),
-        password: String::from("password")
-    };
+    let str1 = String::from("alen");
+    let ans:String;
 
-    let mut v: Vec<u8> = Vec::new();
+    {
+        let str2 = String::from("alex");
+        ans = get_longer_string(&str1, &str2).to_string();
+    }
+    print!("{}", ans);
 
-    let _ans = u.serialize(&mut v);
+}
 
-    let user = User::try_from_slice(&mut v);
-    print!("{:?}", v);
-    print!("{:?}", user)
+fn get_longer_string<'a, 'b>(s1:&'a String, s2:&'b String)-> &'b String{ 
+    if s1.len()>s2.len(){
+        return &s1;
+    }
+    else {return &s2;}
 }
 
