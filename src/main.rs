@@ -1,23 +1,23 @@
-use serde::{Serialize, Deserialize};
-use serde_json::{self};
+use borsh:: {BorshSerialize, BorshDeserialize};
 
-#[derive(Serialize, Deserialize, Debug)]
-struct Person {
-    name: String,
-    age: u32,
+#[derive(BorshSerialize,BorshDeserialize,Clone,Debug)]
+struct User {
+    username: String,
+    password: String
 }
 
-fn main() {
-    let person = Person {
-        name: String::from("John Doe"),
-        age: 30,
+fn main (){
+    let u = User{
+        username: String::from("alen"),
+        password: String::from("password")
     };
 
-    // Serialize to JSON
-    let json_str = serde_json::to_string(&person).unwrap();
-    println!("Serialized JSON: {}", json_str);
+    let mut v: Vec<u8> = Vec::new();
 
-    // Deserialize from JSON
-    let deserialized_person: Person = serde_json::from_str(&json_str).unwrap();
-    println!("Deserialized Person: {:?}", deserialized_person);
+    let _ans = u.serialize(&mut v);
+
+    let user = User::try_from_slice(&mut v);
+    print!("{:?}", v);
+    print!("{:?}", user)
 }
+
